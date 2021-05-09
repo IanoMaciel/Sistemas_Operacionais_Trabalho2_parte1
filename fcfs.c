@@ -1,33 +1,20 @@
-/**
- * 
- * Problema A - Implementação do algoritmo FCFS
- * 
- * Autor: Iano Maciel
- * */
-
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
-typedef struct Dados
-{
-    int tExecucao[20]; //tempo de execução
-    int tEspera[20]; //tempo de espera
-    int tTurnaround[20]; //tempo de turnaround
-    float tmpEspera; //tempo médio de espera
-    float tmpTurn; //tempo médio de turnaround
-}t_dados;
+#define max 20
 
- 
- int main()
+void exibir(int array[], int tam);
+float tempoEspera(int array1[], int array2[], int tam);
+float tempoTurnaround(int array1[], int array2[], int array3[], int tam);
+
+int main()
 {
-    t_dados dados;
-    dados.tmpEspera = 0;
-    dados.tmpTurn = 0;
-    int i, j, tam, op;
+    int tExecucao[max], tEspera[max], tTurnaround[max];
+    int processo[max];
+    int i, tam, op;
     int cont = 0;
 
-    while(cont > -1)
+    while(-1 < cont)
     {
         printf("Infrome o tamanho do processos: ");
         scanf("%d", &tam);
@@ -35,32 +22,15 @@ typedef struct Dados
         for(i=0; i<tam; i++)
         {
             printf("Processo[%d]: ", i+1);
-            scanf("%d", &dados.tExecucao[i]);
+            scanf("%d", &tExecucao[i]);
+            processo[i] = i+1;
         }
 
-        dados.tEspera[0] = 0;
-        for(i=1; i<tam; i++)
-        {
-            dados.tEspera[i] = 0;
-            for(j=0; j<i; j++)
-                dados.tEspera[i] += dados.tExecucao[j];
-        }
+        printf("\n\nTeste %d\n", cont+1);
+        printf("Tempo medio de espera: %0.2f\n", tempoEspera(tEspera, tExecucao, tam));
+        printf("Tempo medio de turnaround: %0.2f\n", tempoTurnaround(tTurnaround, tExecucao, tEspera, tam));
+        exibir(processo, tam);
         
-        for(i=0; i<tam; i++)
-        {
-            dados.tTurnaround[i] = dados.tExecucao[i] + dados.tEspera[i];
-            dados.tmpEspera += dados.tEspera[i];
-            dados.tmpTurn += dados.tTurnaround[i];
-        }
-        dados.tmpEspera /= tam;
-        dados.tmpTurn /= tam;
-
-        printf("\n\nTeste %d", cont+1);
-        printf("\nTempo medio de espera: %0.2f", dados.tmpEspera);
-        printf("\nTempo medio de turnaround: %0.2f\n", dados.tmpTurn);
-        for(i=0; i<tam; i++)
-            printf("P%d\t", i+1);
-
         printf("\n\n1 - Testar novamente\n0 - Sair\nOP: ");
         scanf("%d", &op);
         
@@ -72,4 +42,48 @@ typedef struct Dados
         else if(op == 0)
             return 0;
     }
+}
+
+void exibir(int array[], int tam)
+{
+    int i;
+
+    for(i=0; i<tam; i++)
+    {
+        printf("P%d\t", array[i]);
+    }
+}
+
+float tempoEspera(int array1[], int array2[], int tam)
+{
+    int i, j;
+    float total;
+
+    array1[0] = 0;
+
+    for(i=1; i<tam; i++)
+    {
+        array1[i] = 0;
+        for(j=0; j<i; j++)
+        {
+            array1[i] += array2[j];
+        }
+    }
+    for(i=0; i<tam; i++)
+        total += array1[i];
+    
+   return (total/tam);
+}
+
+float tempoTurnaround(int array1[], int array2[], int array3[], int tam)
+{
+    int i;
+    float total;
+
+    for(i=0; i<tam; i++)
+    {
+        array1[i] = array2[i] + array3[i];
+        total += array1[i];
+    }
+    return (total/tam);
 }
