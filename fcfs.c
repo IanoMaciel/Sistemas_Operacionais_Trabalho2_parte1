@@ -1,3 +1,10 @@
+/**
+ * 
+ * Problema A - Implementação do algoritmo FCFS
+ * 
+ * Autor: Iano Maciel
+ * */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -19,7 +26,6 @@ typedef struct Dados
     dados.tmpTurn = 0;
     int i, j, tam, op;
     int cont = 0;
-
 
     while(cont > -1)
     {
@@ -57,11 +63,13 @@ typedef struct Dados
 
         printf("\n\n1 - Testar novamente\n0 - Sair\nOP: ");
         scanf("%d", &op);
+        
         if(op == 1)
         {
             cont++;
             system("clear");
-        } else if(op == 0)
+        } 
+        else if(op == 0)
             return 0;
     }
 }
