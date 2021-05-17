@@ -6,6 +6,8 @@
 //imprime array
 void exibir(int array[], int tam);
 
+void cadastrarTempoExecucao(int array1[], int array2[], int tam);
+
 //ordena o array tExecuta de acordo com o tempo de execução
 void orderna(int array1[], int array2[], int tam);
 
@@ -26,12 +28,16 @@ int main()
         printf("Informe o tamanho do processo: ");
         scanf("%d", &tam);
 
+        /*
         for(i=0; i<tam; i++)
         {
             printf("Processo[%d]: ", i+1);
             scanf("%d", &tExecucao[i]);
             processo[i] = i+1;
         }
+        */
+
+        cadastrarTempoExecucao(tExecucao, processo, tam);
 
         orderna(tExecucao, processo, tam);
 
@@ -60,6 +66,18 @@ void exibir(int array[], int tam)
     for(i=0; i<tam; i++)
     {
         printf("P%d\t", array[i]);
+    }
+}
+
+void cadastrarTempoExecucao(int array1[], int array2[], int tam)
+{
+    int i;
+
+    for(i=0; i<tam; i++)
+    {
+        printf("Processo[%d]: ", i+1);
+        scanf("%d", &array1[i]);
+        array2[i] = i + 1;
     }
 }
 
