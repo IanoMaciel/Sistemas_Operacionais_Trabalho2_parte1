@@ -20,14 +20,6 @@ int main()
         printf("Infrome o tamanho do processos: ");
         scanf("%d", &tam);
 
-        /*
-        for(i=0; i<tam; i++)
-        {
-            printf("Processo[%d]: ", i+1);
-            scanf("%d", &tExecucao[i]);
-            processo[i] = i+1;
-        }
-        */
         cadastrarTempoExecucao(tExecucao, processo, tam);
         printf("\n\nTeste %d\n", cont+1);
         printf("Tempo medio de espera: %0.2f\n", tempoEspera(tEspera, tExecucao, tam));
