@@ -4,6 +4,7 @@
 #define max 20
 
 void exibir(int array[], int tam);
+void cadastrarTempoExecucao(int array1[], int array2[], int tam);
 float tempoEspera(int array1[], int array2[], int tam);
 float tempoTurnaround(int array1[], int array2[], int array3[], int tam);
 
@@ -19,13 +20,15 @@ int main()
         printf("Infrome o tamanho do processos: ");
         scanf("%d", &tam);
 
+        /*
         for(i=0; i<tam; i++)
         {
             printf("Processo[%d]: ", i+1);
             scanf("%d", &tExecucao[i]);
             processo[i] = i+1;
         }
-
+        */
+        cadastrarTempoExecucao(tExecucao, processo, tam);
         printf("\n\nTeste %d\n", cont+1);
         printf("Tempo medio de espera: %0.2f\n", tempoEspera(tEspera, tExecucao, tam));
         printf("Tempo medio de turnaround: %0.2f\n", tempoTurnaround(tTurnaround, tExecucao, tEspera, tam));
@@ -43,7 +46,17 @@ int main()
             return 0;
     }
 }
+void cadastrarTempoExecucao(int array1[], int array2[], int tam)
+{
+    int i;
 
+    for(i=0; i<tam; i++)
+    {
+        printf("Processo[%d]: ", i+1);
+        scanf("%d", &array1[i]);
+        array2[i] = i + 1;
+    }
+}
 void exibir(int array[], int tam)
 {
     int i;
